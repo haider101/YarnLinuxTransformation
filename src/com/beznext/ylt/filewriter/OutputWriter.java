@@ -61,9 +61,9 @@ public class OutputWriter
             
             //Fields in Employee Bean
             String[] columns = new String[]{"START_TIME","END_TIME","WKLD_ELEMENT_1","WKLD_ELEMENT_2","WKLD_ELEMENT_3","WKLD_ELEMENT_4",
-						            		"WKLD_ELEMENT_5","UsrTimeMS","SysTimeMS","cpuYarn","elapsedTimeSec","VMRssKB",
-						            		"memoryYarn","logReads","logReadsKB","logWrites","logWritesKB","physReadsKB",
-						            		"physWritesKB","avgReqParallelism","priority"};
+						            		"PROCESS_ID","COMMAND","UsrTimeMS","SysTimeMS","elapsedTimeSec","VMRssKB",
+						            		"logReads","logReadsKB","logWrites","logWritesKB","physReadsKB",
+						            		"physWritesKB","avgReqParallelism","priority","WKLD_ELEMENT_5","cpuYarn","memoryYarn",};
             
             //Setting the colums for mappingStrategy
             mappingStrategy.setColumnMapping(columns);

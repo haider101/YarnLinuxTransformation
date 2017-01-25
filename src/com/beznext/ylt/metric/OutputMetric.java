@@ -97,6 +97,13 @@ public class OutputMetric {
 
 	@CsvBindByName
 	private double priority;
+	
+	
+	@CsvBindByName
+	private String PROCESS_ID;
+	
+	@CsvBindByName
+	private String COMMAND;
 
 	public String getSTART_TIME() {
 		return START_TIME;
@@ -266,20 +273,38 @@ public class OutputMetric {
 		this.priority = priority;
 	}
 
+	public String getPROCESS_ID() {
+		return PROCESS_ID;
+	}
+
+	public void setPROCESS_ID(String pROCESS_ID) {
+		PROCESS_ID = pROCESS_ID;
+	}
+
+	public String getCOMMAND() {
+		return COMMAND;
+	}
+
+	public void setCOMMAND(String cOMMAND) {
+		COMMAND = cOMMAND;
+	}
+
 	@Override
 	public String toString() {
-		return "OutputMetric [appStartTime=" + START_TIME + ", appEndTime="
-				+ END_TIME + ", userName=" + WKLD_ELEMENT_1 + ", hostName="
-				+ WKLD_ELEMENT_2 + ", application=" + WKLD_ELEMENT_3 + ", subSystem="
-				+ WKLD_ELEMENT_4 + ", externalWorkload=" + WKLD_ELEMENT_5
-				+ ", UsrTimeMS=" + UsrTimeMS + ", SysTimeMS=" + SysTimeMS
-				+ ", cpuYarn=" + cpuYarn + ", elapsedTimeSec=" + elapsedTimeSec
-				+ ", VMRssKB=" + VMRssKB + ", memoryYarn=" + memoryYarn
-				+ ", logReads=" + logReads + ", logReadsKB=" + logReadsKB
-				+ ", logWrites=" + logWrites + ", logWritesKB=" + logWritesKB
-				+ ", physReadsKB=" + physReadsKB + ", physWritesKB="
-				+ physWritesKB + ", avgReqParallelism=" + avgReqParallelism
-				+ "]";
+		return "OutputMetric [START_TIME=" + START_TIME + ", END_TIME="
+				+ END_TIME + ", WKLD_ELEMENT_1=" + WKLD_ELEMENT_1
+				+ ", WKLD_ELEMENT_2=" + WKLD_ELEMENT_2 + ", WKLD_ELEMENT_3="
+				+ WKLD_ELEMENT_3 + ", WKLD_ELEMENT_4=" + WKLD_ELEMENT_4
+				+ ", WKLD_ELEMENT_5=" + WKLD_ELEMENT_5 + ", UsrTimeMS="
+				+ UsrTimeMS + ", SysTimeMS=" + SysTimeMS + ", cpuYarn="
+				+ cpuYarn + ", elapsedTimeSec=" + elapsedTimeSec + ", VMRssKB="
+				+ VMRssKB + ", memoryYarn=" + memoryYarn + ", logReads="
+				+ logReads + ", logReadsKB=" + logReadsKB + ", logWrites="
+				+ logWrites + ", logWritesKB=" + logWritesKB + ", physReadsKB="
+				+ physReadsKB + ", physWritesKB=" + physWritesKB
+				+ ", avgReqParallelism=" + avgReqParallelism + ", priority="
+				+ priority + ", PROCESS_ID=" + PROCESS_ID + ", COMMAND="
+				+ COMMAND + "]";
 	}
 
 }
