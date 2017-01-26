@@ -7,18 +7,19 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.beznext.ylt.metric.YarnMetric;
+import com.beznext.ylt.key.Key;
 
 public class YarnDataProcessor {
 	
 	static Logger log = Logger.getLogger(YarnDataProcessor.class);
 	
-	public Map<String, YarnMetric> MetricsWithKey(List<YarnMetric> YarnMetriclst){	
+	public Map<Key, YarnMetric> MetricsWithKey(List<YarnMetric> YarnMetriclst){	
 		
-		Map<String, YarnMetric> yarnKeyMetrics = new HashMap<>();
+		Map<Key, YarnMetric> yarnKeyMetrics = new HashMap<>();
 		
 		for(YarnMetric metric : YarnMetriclst){
-			
-			yarnKeyMetrics.put(metric.getId().toString(), metric);
+			Key key = new Key(metric.getId(), metric.getUser());
+			yarnKeyMetrics.put(key, metric);
 //			System.out.println(metric.getId().toString());			
 			
 		}	

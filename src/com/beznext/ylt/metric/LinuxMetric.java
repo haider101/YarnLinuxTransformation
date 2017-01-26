@@ -1,114 +1,110 @@
 package com.beznext.ylt.metric;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.opencsv.bean.CsvBindByName;
- 
 
 public class LinuxMetric {
-	
-	/** 
-     * Node 
-     */
+
+	/**
+	 * Node
+	 */
 	@CsvBindByName
 	private String NODE;
-	
-	/** 
-     * Id from Linux 
-     */
+
+	/**
+	 * Id from Linux
+	 */
 	@CsvBindByName
 	private String PROCESS_ID;
-	
-	/** 
-     * User Time in milliseconds 
-     */
+
+	/**
+	 * User Time in milliseconds
+	 */
 	@CsvBindByName
 	private double UsrTimeMS;
-	
-	/** 
-     * System Time in milliseconds
-     */
+
+	/**
+	 * System Time in milliseconds
+	 */
 	@CsvBindByName
 	private double SysTimeMS;
 
-    /** 
-     * VMRss in KB 
-     */
+	/**
+	 * VMRss in KB
+	 */
 	@CsvBindByName
-    private double VMRssKB;
+	private double VMRssKB;
 
-    /**
-     * Logical Reads
-     */
+	/**
+	 * Logical Reads
+	 */
 	@CsvBindByName
-    private double LogReads;
+	private double LogReads;
 
-    /** 
-     * Logical Read KBs 
-     */
+	/**
+	 * Logical Read KBs
+	 */
 	@CsvBindByName
-    private double LogReadsKB;
+	private double LogReadsKB;
 
-    /** 
-     * Logical Writes
-     */
+	/**
+	 * Logical Writes
+	 */
 	@CsvBindByName
-    private double LogWrites;
+	private double LogWrites;
 
-    /** 
-     * Logical Write KBs 
-     */
+	/**
+	 * Logical Write KBs
+	 */
 	@CsvBindByName
-    private double LogWritesKB;
-	
-	/** 
-     *  Physical Read KBs 
-     */
-	@CsvBindByName
-    private double PhysReadsKB;
+	private double LogWritesKB;
 
-    /** 
-     * Physical Write KBs 
-     */
+	/**
+	 * Physical Read KBs
+	 */
 	@CsvBindByName
-    private double PhysWritesKB;
+	private double PhysReadsKB;
 
-    /** 
-     * Average Request Parallelism 
-     */
+	/**
+	 * Physical Write KBs
+	 */
 	@CsvBindByName
-    private double AvgReqParallelism;
-	
-	/** 
-     * Start time  
-     */
+	private double PhysWritesKB;
+
+	/**
+	 * Average Request Parallelism
+	 */
 	@CsvBindByName
-    private String START_TIME;
-	
-	/** 
-     * End time  
-     */
+	private double AvgReqParallelism;
+
+	/**
+	 * Start time
+	 */
 	@CsvBindByName
-    private String END_TIME;
-	
-	/** 
-     * User  
-     */
+	private String START_TIME;
+
+	/**
+	 * End time
+	 */
 	@CsvBindByName
-    private String WKLD_ELEMENT_1;	
-	
-	/** 
-     * Application  
-     */
+	private String END_TIME;
+
+	/**
+	 * User
+	 */
 	@CsvBindByName
-    private String WKLD_ELEMENT_3;
-	
-	/** 
-     * SubSystem  
-     */
+	private String WKLD_ELEMENT_1;
+
+	/**
+	 * Application
+	 */
 	@CsvBindByName
-    private String WKLD_ELEMENT_4;
+	private String WKLD_ELEMENT_3;
+
+	/**
+	 * SubSystem
+	 */
+	@CsvBindByName
+	private String WKLD_ELEMENT_4;
 
 	/**
 	 * @return the pROCESS_ID
@@ -118,7 +114,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param pROCESS_ID the pROCESS_ID to set
+	 * @param pROCESS_ID
+	 *            the pROCESS_ID to set
 	 */
 	public void setPROCESS_ID(String pROCESS_ID) {
 		PROCESS_ID = pROCESS_ID;
@@ -132,7 +129,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param usrTimeMS the usrTimeMS to set
+	 * @param usrTimeMS
+	 *            the usrTimeMS to set
 	 */
 	public void setUsrTimeMS(double usrTimeMS) {
 		UsrTimeMS = usrTimeMS;
@@ -146,7 +144,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param sysTimeMS the sysTimeMS to set
+	 * @param sysTimeMS
+	 *            the sysTimeMS to set
 	 */
 	public void setSysTimeMS(double sysTimeMS) {
 		SysTimeMS = sysTimeMS;
@@ -160,7 +159,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param vMRssKB the vMRssKB to set
+	 * @param vMRssKB
+	 *            the vMRssKB to set
 	 */
 	public void setVMRssKB(double vMRssKB) {
 		VMRssKB = vMRssKB;
@@ -174,7 +174,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param logReads the logReads to set
+	 * @param logReads
+	 *            the logReads to set
 	 */
 	public void setLogReads(double logReads) {
 		LogReads = logReads;
@@ -188,7 +189,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param logReadsKB the logReadsKB to set
+	 * @param logReadsKB
+	 *            the logReadsKB to set
 	 */
 	public void setLogReadsKB(double logReadsKB) {
 		LogReadsKB = logReadsKB;
@@ -202,7 +204,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param logWrites the logWrites to set
+	 * @param logWrites
+	 *            the logWrites to set
 	 */
 	public void setLogWrites(double logWrites) {
 		LogWrites = logWrites;
@@ -216,7 +219,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param logWritesKB the logWritesKB to set
+	 * @param logWritesKB
+	 *            the logWritesKB to set
 	 */
 	public void setLogWritesKB(double logWritesKB) {
 		LogWritesKB = logWritesKB;
@@ -230,7 +234,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param physReadsKB the physReadsKB to set
+	 * @param physReadsKB
+	 *            the physReadsKB to set
 	 */
 	public void setPhysReadsKB(double physReadsKB) {
 		PhysReadsKB = physReadsKB;
@@ -244,7 +249,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param physWritesKB the physWritesKB to set
+	 * @param physWritesKB
+	 *            the physWritesKB to set
 	 */
 	public void setPhysWritesKB(double physWritesKB) {
 		PhysWritesKB = physWritesKB;
@@ -258,7 +264,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param avgReqParallelism the avgReqParallelism to set
+	 * @param avgReqParallelism
+	 *            the avgReqParallelism to set
 	 */
 	public void setAvgReqParallelism(double avgReqParallelism) {
 		AvgReqParallelism = avgReqParallelism;
@@ -272,7 +279,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param sTART_TIME the sTART_TIME to set
+	 * @param sTART_TIME
+	 *            the sTART_TIME to set
 	 */
 	public void setSTART_TIME(String sTART_TIME) {
 		START_TIME = sTART_TIME;
@@ -286,7 +294,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param eND_TIME the eND_TIME to set
+	 * @param eND_TIME
+	 *            the eND_TIME to set
 	 */
 	public void setEND_TIME(String eND_TIME) {
 		END_TIME = eND_TIME;
@@ -300,11 +309,12 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param wKLD_ELEMENT_1 the wKLD_ELEMENT_1 to set
+	 * @param wKLD_ELEMENT_1
+	 *            the wKLD_ELEMENT_1 to set
 	 */
 	public void setWKLD_ELEMENT_1(String wKLD_ELEMENT_1) {
 		WKLD_ELEMENT_1 = wKLD_ELEMENT_1;
-	}	
+	}
 
 	/**
 	 * @return the wKLD_ELEMENT_3
@@ -314,7 +324,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param wKLD_ELEMENT_3 the wKLD_ELEMENT_3 to set
+	 * @param wKLD_ELEMENT_3
+	 *            the wKLD_ELEMENT_3 to set
 	 */
 	public void setWKLD_ELEMENT_3(String wKLD_ELEMENT_3) {
 		WKLD_ELEMENT_3 = wKLD_ELEMENT_3;
@@ -328,12 +339,13 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param wKLD_ELEMENT_4 the wKLD_ELEMENT_4 to set
+	 * @param wKLD_ELEMENT_4
+	 *            the wKLD_ELEMENT_4 to set
 	 */
 	public void setWKLD_ELEMENT_4(String wKLD_ELEMENT_4) {
 		WKLD_ELEMENT_4 = wKLD_ELEMENT_4;
 	}
-	
+
 	/**
 	 * @return the NODE
 	 */
@@ -342,7 +354,8 @@ public class LinuxMetric {
 	}
 
 	/**
-	 * @param node the node to set
+	 * @param node
+	 *            the node to set
 	 */
 	public void setNode(String node) {
 		this.NODE = node;
@@ -358,64 +371,8 @@ public class LinuxMetric {
 				+ ", PhysWritesKB=" + PhysWritesKB + ", AvgReqParallelism="
 				+ AvgReqParallelism + ", START_TIME=" + START_TIME
 				+ ", END_TIME=" + END_TIME + ", WKLD_ELEMENT_1="
-				+ WKLD_ELEMENT_1 + ", WKLD_ELEMENT_3=" + WKLD_ELEMENT_3 + ", WKLD_ELEMENT_4="
-				+ WKLD_ELEMENT_4 + "]";
-	}
-
-	/**
-	 * Unique key getter
-	 * @param Id
-	 * @return
-	 */
-	public Key createKey(String Id) {
-		return new Key(Id);
-	}
-	
-	/**
-	 * {@link LinuxMetric} key
-	 * unique key based on the Process metric id
-	 */
-	public static class Key {	
-	    
-	    /**
-	     * Linux Process Id of the metric
-	     */
-	    private String m_Id;
-	    
-	    public String getId() {
-			return m_Id;
-		}
-
-		public void setId(String m_Id) {
-			this.m_Id = m_Id;
-		}
-		
-		protected Key(String Id) {
-			m_Id = Id;
-		}
-		
-		/**
-	     * Two keys are equal only if their Ids are equal.
-	     */
-	    public boolean equals(Object o) {
-	        if(o instanceof Key) {
-	            Key key = (Key)o;
-	            return new EqualsBuilder()
-					.append(m_Id, key.getId())					
-					.isEquals();
-	        }
-	        return false;
-	    }   
-
-		/**
-	     * Return a hash code for this key.
-	     */
-	    public int hashCode() {
-	        return new HashCodeBuilder(89574615, 564413)
-	        	.append(m_Id)
-	        	.toHashCode();
-	    }	
-
+				+ WKLD_ELEMENT_1 + ", WKLD_ELEMENT_3=" + WKLD_ELEMENT_3
+				+ ", WKLD_ELEMENT_4=" + WKLD_ELEMENT_4 + "]";
 	}
 
 }

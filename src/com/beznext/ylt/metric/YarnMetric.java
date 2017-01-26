@@ -1,74 +1,72 @@
 package com.beznext.ylt.metric;
 
 import com.opencsv.bean.CsvBindByName;
- 
 
 public class YarnMetric {
-	
-	public YarnMetric(){
-		
+
+	public YarnMetric() {
+
 	}
-	
-	/** 
-     * Id from yarn 
-     */
+
+	/**
+	 * Id from yarn
+	 */
 	@CsvBindByName
 	private String id;
-	
-	/** 
-     * User from yarn 
-     */
+
+	/**
+	 * User from yarn
+	 */
 	@CsvBindByName
 	private String user;
 
-    /** 
-     * Name from yarn 
-     */
+	/**
+	 * Name from yarn
+	 */
 	@CsvBindByName
-    private String name;
+	private String name;
 
-    /**
-     * SubSystem from yarn
-     */
+	/**
+	 * SubSystem from yarn
+	 */
 	@CsvBindByName
-    private String applicationType;
+	private String applicationType;
 
-    /** 
-     * External Workload from yarn 
-     */
+	/**
+	 * External Workload from yarn
+	 */
 	@CsvBindByName
-    private String queue;
+	private String queue;
 
-    /** 
-     * Application start time stamp in seconds 
-     */
+	/**
+	 * Application start time stamp in seconds
+	 */
 	@CsvBindByName
-    private String startedTime;
+	private String startedTime;
 
-    /** 
-     * Application end time stamp in seconds 
-     */
+	/**
+	 * Application end time stamp in seconds
+	 */
 	@CsvBindByName
-    private String finishedTime;
-	
-	/** 
-     * Elapsed time in Ms 
-     */
-	@CsvBindByName
-    private double elapsedTime;
+	private String finishedTime;
 
-    /** 
-     * Memory used on all nodes 
-     */
+	/**
+	 * Elapsed time in Ms
+	 */
 	@CsvBindByName
-    private double memorySeconds;
+	private double elapsedTime;
 
-    /** 
-     * Total vCore time allocated on all nodes, CPU_YARN 
-     */
+	/**
+	 * Memory used on all nodes
+	 */
 	@CsvBindByName
-    private double vcoreSeconds;
-	
+	private double memorySeconds;
+
+	/**
+	 * Total vCore time allocated on all nodes, CPU_YARN
+	 */
+	@CsvBindByName
+	private double vcoreSeconds;
 
 	/**
 	 * @return the id
@@ -77,14 +75,13 @@ public class YarnMetric {
 		return id;
 	}
 
-
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 	/**
 	 * @return the user
@@ -93,14 +90,13 @@ public class YarnMetric {
 		return user;
 	}
 
-
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(String user) {
 		this.user = user;
 	}
-
 
 	/**
 	 * @return the name
@@ -109,14 +105,13 @@ public class YarnMetric {
 		return name;
 	}
 
-
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	/**
 	 * @return the applicationType
@@ -125,14 +120,13 @@ public class YarnMetric {
 		return applicationType;
 	}
 
-
 	/**
-	 * @param applicationType the applicationType to set
+	 * @param applicationType
+	 *            the applicationType to set
 	 */
 	public void setApplicationType(String applicationType) {
 		this.applicationType = applicationType;
 	}
-
 
 	/**
 	 * @return the queue
@@ -141,14 +135,13 @@ public class YarnMetric {
 		return queue;
 	}
 
-
 	/**
-	 * @param queue the queue to set
+	 * @param queue
+	 *            the queue to set
 	 */
 	public void setQueue(String queue) {
 		this.queue = queue;
 	}
-
 
 	/**
 	 * @return the startedTime
@@ -157,14 +150,13 @@ public class YarnMetric {
 		return startedTime;
 	}
 
-
 	/**
-	 * @param startedTime the startedTime to set
+	 * @param startedTime
+	 *            the startedTime to set
 	 */
 	public void setStartedTime(String startedTime) {
 		this.startedTime = startedTime;
 	}
-
 
 	/**
 	 * @return the finishedTime
@@ -173,14 +165,13 @@ public class YarnMetric {
 		return finishedTime;
 	}
 
-
 	/**
-	 * @param finishedTime the finishedTime to set
+	 * @param finishedTime
+	 *            the finishedTime to set
 	 */
 	public void setFinishedTime(String finishedTime) {
 		this.finishedTime = finishedTime;
 	}
-
 
 	/**
 	 * @return the elapsedTime
@@ -189,14 +180,13 @@ public class YarnMetric {
 		return elapsedTime;
 	}
 
-
 	/**
-	 * @param elapsedTime the elapsedTime to set
+	 * @param elapsedTime
+	 *            the elapsedTime to set
 	 */
 	public void setElapsedTime(double elapsedTime) {
 		this.elapsedTime = elapsedTime;
 	}
-
 
 	/**
 	 * @return the memorySeconds
@@ -205,14 +195,13 @@ public class YarnMetric {
 		return memorySeconds;
 	}
 
-
 	/**
-	 * @param memorySeconds the memorySeconds to set
+	 * @param memorySeconds
+	 *            the memorySeconds to set
 	 */
 	public void setMemorySeconds(double memorySeconds) {
 		this.memorySeconds = memorySeconds;
 	}
-
 
 	/**
 	 * @return the vcoreSeconds
@@ -221,14 +210,13 @@ public class YarnMetric {
 		return vcoreSeconds;
 	}
 
-
 	/**
-	 * @param vcoreSeconds the vcoreSeconds to set
+	 * @param vcoreSeconds
+	 *            the vcoreSeconds to set
 	 */
 	public void setVcoreSeconds(double vcoreSeconds) {
 		this.vcoreSeconds = vcoreSeconds;
 	}
-
 
 	@Override
 	public String toString() {
@@ -238,6 +226,6 @@ public class YarnMetric {
 				+ finishedTime + ", elapsedTime=" + elapsedTime
 				+ ", memorySeconds=" + memorySeconds + ", vcoreSeconds="
 				+ vcoreSeconds + "]";
-	}    
+	}
 
 }

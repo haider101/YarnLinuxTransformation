@@ -1,6 +1,5 @@
 package com.beznext.ylt.dataprocessor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.beznext.ylt.metric.LinuxMetric;
-import com.beznext.ylt.metric.LinuxMetric.Key;
+import com.beznext.ylt.key.Key;
 
 public class LinuxDataProcessor {
 	
@@ -59,55 +58,68 @@ public class LinuxDataProcessor {
 //		return equivalentMetrics;
 //	}
 	
-	public Map<Key, List<LinuxMetric>> MetricsWithKey(List<LinuxMetric> linuxMetriclst){	
-		
-		//Put the calculated metrics in targetMetrics
-		Map<Key, List<LinuxMetric>> equivalentMetrics = new HashMap<Key, List<LinuxMetric>>();
-			
-		try{	
-			for (LinuxMetric collectedMetric : linuxMetriclst) {			
-				Key key = collectedMetric.createKey(collectedMetric.getWKLD_ELEMENT_3());
-				if(!equivalentMetrics.containsKey(key)){
-					List<LinuxMetric> equivalentMetricLst = new ArrayList<>();
-					equivalentMetrics.put(key,equivalentMetricLst);
-				}			
-			}
-						
-			for (LinuxMetric collectedMetric : linuxMetriclst) {
-				
-				Key key = collectedMetric.createKey(collectedMetric.getWKLD_ELEMENT_3());
-				List<LinuxMetric> equivalentMetricLst = equivalentMetrics.get(key);
-				
-				LinuxMetric equivalentMetric = new LinuxMetric();					
-				
-				equivalentMetric.setPROCESS_ID(collectedMetric.getPROCESS_ID());
-				equivalentMetric.setWKLD_ELEMENT_1(collectedMetric.getWKLD_ELEMENT_1());
-				equivalentMetric.setWKLD_ELEMENT_3(collectedMetric.getWKLD_ELEMENT_3());
-//				equivalentMetric.setWKLD_ELEMENT_2(collectedMetric.getWKLD_ELEMENT_2());
-				equivalentMetric.setNode(collectedMetric.getNode());
-				equivalentMetric.setWKLD_ELEMENT_4(collectedMetric.getWKLD_ELEMENT_4());
-				equivalentMetric.setSTART_TIME(collectedMetric.getSTART_TIME());
-				equivalentMetric.setEND_TIME(collectedMetric.getEND_TIME());
+//	public Map<Key, List<LinuxMetric>> MetricsWithKey(List<LinuxMetric> linuxMetriclst){	
+//		
+//		//Put the calculated metrics in targetMetrics
+//		Map<Key, List<LinuxMetric>> equivalentMetrics = new HashMap<Key, List<LinuxMetric>>();
+//			
+//		try{	
+//			for (LinuxMetric collectedMetric : linuxMetriclst) {			
+//				Key key = collectedMetric.createKey(collectedMetric.getWKLD_ELEMENT_3());
+//				if(!equivalentMetrics.containsKey(key)){
+//					List<LinuxMetric> equivalentMetricLst = new ArrayList<>();
+//					equivalentMetrics.put(key,equivalentMetricLst);
+//				}			
+//			}
+//						
+//			for (LinuxMetric collectedMetric : linuxMetriclst) {
+//				
+//				Key key = collectedMetric.createKey(collectedMetric.getWKLD_ELEMENT_3());
+//				List<LinuxMetric> equivalentMetricLst = equivalentMetrics.get(key);
+//				
+//				LinuxMetric equivalentMetric = new LinuxMetric();					
+//				
+//				equivalentMetric.setPROCESS_ID(collectedMetric.getPROCESS_ID());
+//				equivalentMetric.setWKLD_ELEMENT_1(collectedMetric.getWKLD_ELEMENT_1());
+//				equivalentMetric.setWKLD_ELEMENT_3(collectedMetric.getWKLD_ELEMENT_3());
+////				equivalentMetric.setWKLD_ELEMENT_2(collectedMetric.getWKLD_ELEMENT_2());
+//				equivalentMetric.setNode(collectedMetric.getNode());
+//				equivalentMetric.setWKLD_ELEMENT_4(collectedMetric.getWKLD_ELEMENT_4());
+//				equivalentMetric.setSTART_TIME(collectedMetric.getSTART_TIME());
+//				equivalentMetric.setEND_TIME(collectedMetric.getEND_TIME());
+//	
+//				equivalentMetric.setUsrTimeMS(collectedMetric.getUsrTimeMS());
+//				equivalentMetric.setSysTimeMS(collectedMetric.getSysTimeMS());
+//				equivalentMetric.setVMRssKB(collectedMetric.getVMRssKB());			
+//				equivalentMetric.setLogReads(collectedMetric.getLogReads());
+//				equivalentMetric.setLogReadsKB(collectedMetric.getLogReadsKB());
+//				equivalentMetric.setLogWrites(collectedMetric.getLogWrites());
+//				equivalentMetric.setLogWritesKB(collectedMetric.getLogWritesKB());
+//				equivalentMetric.setPhysReadsKB(collectedMetric.getPhysReadsKB());
+//				equivalentMetric.setPhysWritesKB(collectedMetric.getPhysWritesKB());
+//				equivalentMetric.setAvgReqParallelism(collectedMetric.getAvgReqParallelism());
+//				
+//				equivalentMetricLst.add(equivalentMetric);						
+//			}				
+//		}
+//		catch (Exception ex) {
+//			log.error("Linux data accumulation exception " +ex);
+//			System.out.println("Dataprocessor Exception "+ ex);				
+//		}	
+//		return equivalentMetrics;
+//	}
 	
-				equivalentMetric.setUsrTimeMS(collectedMetric.getUsrTimeMS());
-				equivalentMetric.setSysTimeMS(collectedMetric.getSysTimeMS());
-				equivalentMetric.setVMRssKB(collectedMetric.getVMRssKB());			
-				equivalentMetric.setLogReads(collectedMetric.getLogReads());
-				equivalentMetric.setLogReadsKB(collectedMetric.getLogReadsKB());
-				equivalentMetric.setLogWrites(collectedMetric.getLogWrites());
-				equivalentMetric.setLogWritesKB(collectedMetric.getLogWritesKB());
-				equivalentMetric.setPhysReadsKB(collectedMetric.getPhysReadsKB());
-				equivalentMetric.setPhysWritesKB(collectedMetric.getPhysWritesKB());
-				equivalentMetric.setAvgReqParallelism(collectedMetric.getAvgReqParallelism());
-				
-				equivalentMetricLst.add(equivalentMetric);						
-			}				
-		}
-		catch (Exception ex) {
-			log.error("Linux data accumulation exception " +ex);
-			System.out.println("Dataprocessor Exception "+ ex);				
+	public Map<Key, LinuxMetric> MetricsWithKey(List<LinuxMetric> linuxMetriclst){
+		
+		Map<Key, LinuxMetric> linuxKeyMetrics = new HashMap<>();
+		
+		for(LinuxMetric metric : linuxMetriclst){
+			Key key = new Key(metric.getWKLD_ELEMENT_3(), metric.getWKLD_ELEMENT_1());
+			linuxKeyMetrics.put(key, metric);
+//			System.out.println(metric.getId().toString());			
+			
 		}	
-		return equivalentMetrics;
+		return linuxKeyMetrics;	
 	}
 
 }

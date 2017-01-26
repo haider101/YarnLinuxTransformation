@@ -71,10 +71,14 @@ public class OutputWriter
             //Writing empList to csv file
             bc.write(mappingStrategy,csvWriter,outpList);
 //            System.out.println("CSV File created successfully.");
-            log.info("CSV File created successfully.");
+            log.info("CSV File created successfully, File name : " +OutputFileName);
             Set<Long> processedHours = new HashSet<Long>();
-            processedHours.add(mk.getTimestampkey().getTimestamp());
-            intervalStore.wirteIntervalToFile(processedHours);
+            Set<Long> alreadyNotedhour = intervalStore.getProcessedFiles();
+            if(!alreadyNotedhour.contains(mk.getTimestampkey().getTimestamp())){
+            	processedHours.add(mk.getTimestampkey().getTimestamp());
+            	intervalStore.wirteIntervalToFile(processedHours);
+            }
+            
 		}
 		catch(Exception ee)
 		{

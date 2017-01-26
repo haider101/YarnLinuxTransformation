@@ -12,8 +12,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.beznext.ylt.key.MixKey;
+import com.beznext.ylt.key.Key;
 import com.beznext.ylt.metric.LinuxMetric;
-import com.beznext.ylt.metric.LinuxMetric.Key;
 import com.beznext.ylt.metric.OutputMetric;
 import com.beznext.ylt.metric.QueuePriorityMetric;
 import com.beznext.ylt.metric.YarnMetric;
@@ -76,32 +76,34 @@ public class Transformer {
 		List<OutputMetric> outputlst = new ArrayList<OutputMetric>();	
 		
 		//accumulate Linux data with same application id
-		log.info("Accumulating linux data with same application id");
+//		log.info("Accumulating linux data with same application id");
 		
 		LinuxDataProcessor linuxDataProcessor = new LinuxDataProcessor();
 		YarnDataProcessor yarnDataProcessor = new YarnDataProcessor();
 
-		Map<Key, List<LinuxMetric>> equivalentMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
-		Map<String, YarnMetric> yarnKeyMetrics = yarnDataProcessor.MetricsWithKey(yarnlst);
+//		Map<Key, List<LinuxMetric>> equivalentMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
+//		Map<String, YarnMetric> yarnKeyMetrics = yarnDataProcessor.MetricsWithKey(yarnlst);
+		Map<Key, LinuxMetric> linuxkeyMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
+		Map<Key, YarnMetric> yarnKeyMetrics = yarnDataProcessor.MetricsWithKey(yarnlst);
 		Set<Key> ignoreMetrics = new HashSet<>();
 		
 		try{
 			
 			log.info("Combining linux and yarn processed metrics.");			
 
-			Iterator<Entry<Key, List<LinuxMetric>>> it = equivalentMetrics.entrySet().iterator();
+			Iterator<Entry<Key, LinuxMetric>> it = linuxkeyMetrics.entrySet().iterator();
 			while (it.hasNext()) {
 				    	
-		    	Entry<Key, List<LinuxMetric>> entry = it.next();
+		    	Entry<Key, LinuxMetric> entry = it.next();
 		    	Key key = entry.getKey();		    	
-		    	YarnMetric yarnMetric = yarnKeyMetrics.get(key.getId());			
+		    	YarnMetric yarnMetric = yarnKeyMetrics.get(key);			
 		    	OutputMetric output = new OutputMetric();
 		    	if(yarnMetric!=null){
-			    	List<LinuxMetric> linuxmetriclst = equivalentMetrics.get(key);
+			    	LinuxMetric linuxmetric = linuxkeyMetrics.get(key);
 			    	
-					if(linuxmetriclst != null && linuxmetriclst.size()>0){
+//					if(linuxmetriclst != null && linuxmetriclst.size()>0){
 						
-						for(LinuxMetric linuxmetric: linuxmetriclst){		
+//						for(LinuxMetric linuxmetric: linuxmetriclst){		
 							
 							output.setSTART_TIME(yarnMetric.getStartedTime());
 							output.setEND_TIME(yarnMetric.getFinishedTime());
@@ -109,7 +111,11 @@ public class Transformer {
 							output.setWKLD_ELEMENT_1(yarnMetric.getUser());
 							output.setWKLD_ELEMENT_2(linuxmetric.getNode());
 							output.setWKLD_ELEMENT_3(yarnMetric.getName());
-							output.setWKLD_ELEMENT_4("YARN_"+yarnMetric.getApplicationType());
+							if(linuxmetric.getWKLD_ELEMENT_4().equals("YARN")){
+								output.setWKLD_ELEMENT_4("YARN_"+yarnMetric.getApplicationType());
+							}else{
+								output.setWKLD_ELEMENT_4(yarnMetric.getApplicationType());
+							}
 							output.setWKLD_ELEMENT_5(yarnMetric.getQueue());
 							output.setCpuYarn(yarnMetric.getVcoreSeconds());
 							output.setElapsedTimeSec(yarnMetric.getElapsedTime()/1000);			
@@ -134,19 +140,19 @@ public class Transformer {
 							outputlst.add(output);
 						}
 					}			
-				}
-			}
+//				}
+//			}
 		
 		//add all Linux metric left unmatched with yarn metrics to output		
-		Iterator<Entry<Key, List<LinuxMetric>>> iter = equivalentMetrics.entrySet().iterator();
+		Iterator<Entry<Key, LinuxMetric>> iter = linuxkeyMetrics.entrySet().iterator();
 		
 	    while (iter.hasNext()) {	    	
 	    	
-	    	Entry<Key, List<LinuxMetric>> entry = iter.next();	    	
-	    	List<LinuxMetric> metricLst = entry.getValue();
+	    	Entry<Key, LinuxMetric> entry = iter.next();	    	
+	    	LinuxMetric metric = entry.getValue();
 	    	Key key = entry.getKey();
 	    	if(!ignoreMetrics.contains(key)){
-		    	for(LinuxMetric metric: metricLst){
+//		    	for(LinuxMetric metric: metricLst){
 			    	OutputMetric output = new OutputMetric();
 			    	
 			    	output.setSTART_TIME(metric.getSTART_TIME());
@@ -177,7 +183,7 @@ public class Transformer {
 					outputlst.add(output);
 		    	}	        
 		    }
-	    }
+//	    }
 		}catch(Exception e ){
 			log.error("Linux Data Processing Exception" +e);
 			System.out.println("Transformer Exception "+e);
