@@ -37,10 +37,10 @@ public class OutputWriter
 	
 	public void WriteOuputToFile(List<OutputMetric> outpList, MixKey mk)
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
 		String datetime = sdf.format(mk.getTimestampkey().getTimestamp());
 		
-		String OutputFileName = "WKLD_"+mk.getNodekey().toString()+"_"+datetime+".csv";
+		String OutputFileName = "PROCESS_"+mk.getNodekey().toString()+"_"+datetime+".csv";
 //		String OutputFileName = "WKLD_"+mk.getNodekey().toString()+".csv";
 		
 		CSVWriter csvWriter = null;
