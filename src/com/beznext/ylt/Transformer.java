@@ -164,7 +164,7 @@ public class Transformer {
 					output.setWKLD_ELEMENT_4(metric.getWKLD_ELEMENT_4());
 					output.setWKLD_ELEMENT_5("");
 					output.setCpuYarn(0);
-					output.setElapsedTimeSec(0);			
+					output.setElapsedTimeSec(metric.getElapsedTimeSec());			
 						
 					output.setUsrTimeMS(metric.getUsrTimeMS());
 					output.setSysTimeMS(metric.getSysTimeMS());

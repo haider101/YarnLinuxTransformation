@@ -27,6 +27,12 @@ public class LinuxMetric {
 	 */
 	@CsvBindByName
 	private double SysTimeMS;
+	
+	/**
+	 * Elapsed time in Ms
+	 */
+	@CsvBindByName
+	private double ElapsedTimeSec;	
 
 	/**
 	 * VMRss in KB
@@ -149,6 +155,20 @@ public class LinuxMetric {
 	 */
 	public void setSysTimeMS(double sysTimeMS) {
 		SysTimeMS = sysTimeMS;
+	}
+
+	/**
+	 * @return the elapsedTimeSec
+	 */
+	public double getElapsedTimeSec() {
+		return ElapsedTimeSec;
+	}
+
+	/**
+	 * @param elapsedTimeSec the elapsedTimeSec to set
+	 */
+	public void setElapsedTimeSec(double elapsedTimeSec) {
+		ElapsedTimeSec = elapsedTimeSec;
 	}
 
 	/**
@@ -363,16 +383,16 @@ public class LinuxMetric {
 
 	@Override
 	public String toString() {
-		return "LinuxMetric [PROCESS_ID=" + PROCESS_ID + ", UsrTimeMS="
-				+ UsrTimeMS + ", SysTimeMS=" + SysTimeMS + ", VMRssKB="
-				+ VMRssKB + ", LogReads=" + LogReads + ", LogReadsKB="
-				+ LogReadsKB + ", LogWrites=" + LogWrites + ", LogWritesKB="
-				+ LogWritesKB + ", PhysReadsKB=" + PhysReadsKB
-				+ ", PhysWritesKB=" + PhysWritesKB + ", AvgReqParallelism="
-				+ AvgReqParallelism + ", START_TIME=" + START_TIME
-				+ ", END_TIME=" + END_TIME + ", WKLD_ELEMENT_1="
-				+ WKLD_ELEMENT_1 + ", WKLD_ELEMENT_3=" + WKLD_ELEMENT_3
-				+ ", WKLD_ELEMENT_4=" + WKLD_ELEMENT_4 + "]";
+		return "LinuxMetric [NODE=" + NODE + ", PROCESS_ID=" + PROCESS_ID
+				+ ", UsrTimeMS=" + UsrTimeMS + ", SysTimeMS=" + SysTimeMS
+				+ ", ElapsedTimeSec=" + ElapsedTimeSec + ", VMRssKB=" + VMRssKB
+				+ ", LogReads=" + LogReads + ", LogReadsKB=" + LogReadsKB
+				+ ", LogWrites=" + LogWrites + ", LogWritesKB=" + LogWritesKB
+				+ ", PhysReadsKB=" + PhysReadsKB + ", PhysWritesKB="
+				+ PhysWritesKB + ", AvgReqParallelism=" + AvgReqParallelism
+				+ ", START_TIME=" + START_TIME + ", END_TIME=" + END_TIME
+				+ ", WKLD_ELEMENT_1=" + WKLD_ELEMENT_1 + ", WKLD_ELEMENT_3="
+				+ WKLD_ELEMENT_3 + ", WKLD_ELEMENT_4=" + WKLD_ELEMENT_4 + "]";
 	}
 
 }
