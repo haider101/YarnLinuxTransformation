@@ -9,6 +9,10 @@ public class TimestampKey  {
 	
 
 	private long timestamp;
+	
+	public TimestampKey() {
+		
+	}
 
 	public TimestampKey(long ts) {
 		Calendar cal = Calendar.getInstance();
@@ -34,6 +38,15 @@ public class TimestampKey  {
 		cal.set(Calendar.MILLISECOND, 0);
 		this.timestamp=cal.getTimeInMillis();
 //		System.out.println("TimeStamp : "+ cal.getTime());
+	}
+	
+	public String roundToNextHour(String ts) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(Long.parseLong(ts));
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);		
+		return String.valueOf((cal.getTimeInMillis() + 3600000));
 	}
 
 	public long getTimestamp() {

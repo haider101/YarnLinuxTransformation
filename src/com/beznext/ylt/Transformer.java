@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.beznext.ylt.key.MixKey;
 import com.beznext.ylt.key.Key;
+import com.beznext.ylt.key.TimestampKey;
 import com.beznext.ylt.metric.LinuxMetric;
 import com.beznext.ylt.metric.OutputMetric;
 import com.beznext.ylt.metric.QueuePriorityMetric;
@@ -80,6 +81,7 @@ public class Transformer {
 		
 		LinuxDataProcessor linuxDataProcessor = new LinuxDataProcessor();
 		YarnDataProcessor yarnDataProcessor = new YarnDataProcessor();
+		TimestampKey ts = new TimestampKey();
 
 //		Map<Key, List<LinuxMetric>> equivalentMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
 //		Map<String, YarnMetric> yarnKeyMetrics = yarnDataProcessor.MetricsWithKey(yarnlst);
@@ -106,7 +108,12 @@ public class Transformer {
 //						for(LinuxMetric linuxmetric: linuxmetriclst){		
 							
 							output.setSTART_TIME(yarnMetric.getStartedTime());
-							output.setEND_TIME(yarnMetric.getFinishedTime());
+							if(yarnMetric.getFinishedTime().equals("0")){								
+								output.setEND_TIME(ts.roundToNextHour(yarnMetric.getStartedTime()));
+							}
+							else{							
+								output.setEND_TIME(yarnMetric.getFinishedTime());
+							}
 							
 							output.setWKLD_ELEMENT_1(yarnMetric.getUser());
 							output.setWKLD_ELEMENT_2(linuxmetric.getNode());
