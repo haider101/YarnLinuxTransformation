@@ -6,7 +6,5 @@
 	<classpathentry kind="lib" path="commons-lang3-3.4.jar"/>
 	<classpathentry kind="lib" path="gson-2.2.2.jar"/>
 	<classpathentry kind="lib" path="log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="slf4j-api-1.5.3.jar"/>
-	<classpathentry kind="lib" path="slf4j-log4j12-1.5.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

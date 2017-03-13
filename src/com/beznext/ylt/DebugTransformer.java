@@ -78,7 +78,7 @@ public class DebugTransformer {
 		
 		ICollector yColletor = new YarnCollector(yarnDataPath,intervalStore);
 		ICollector lColletor = new LinuxCollector(linuxDataPath,intervalStore);
-		ICollector qColletor = new QueuePriorityCollector(linuxDataPath,intervalStore);
+		ICollector qColletor = new QueuePriorityCollector(yarnDataPath,intervalStore);
 		
 		Transformer t = new Transformer();		
 		List<HourlyMetric> hourlymetrics = t.getHourlyMetrics(yColletor.collect(), qColletor.collect(),lColletor.collect());

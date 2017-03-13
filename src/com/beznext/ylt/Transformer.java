@@ -140,7 +140,10 @@ public class Transformer {
 							output.setPhysReadsKB(linuxmetric.getPhysReadsKB());
 							output.setPhysWritesKB(linuxmetric.getPhysWritesKB());
 							output.setAvgReqParallelism(linuxmetric.getAvgReqParallelism());
-							output.setPriority(queuePriority.get(yarnMetric.getQueue()));
+							if(!queuePriority.isEmpty())
+							{
+								output.setPriority(queuePriority.get(yarnMetric.getQueue()));
+								}
 //							equivalentMetrics.remove(key);
 							ignoreMetrics.add(key);
 							
@@ -194,6 +197,7 @@ public class Transformer {
 		}catch(Exception e ){
 			log.error("Linux Data Processing Exception" +e);
 			System.out.println("Transformer Exception "+e);
+			e.printStackTrace();
 		}
 				
 		return outputlst;
