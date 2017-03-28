@@ -18,7 +18,11 @@ public class YarnDataProcessor {
 		Map<Key, YarnMetric> yarnKeyMetrics = new HashMap<>();
 		
 		for(YarnMetric metric : YarnMetriclst){
-			Key key = new Key(metric.getId(), metric.getUser());
+			String wkld3 = metric.getId();
+			if(metric.getId().contains("application")){
+				wkld3= metric.getId().substring(metric.getId().indexOf("_")+1);
+			}
+			Key key = new Key(wkld3, metric.getUser());
 			yarnKeyMetrics.put(key, metric);
 //			System.out.println(metric.getId().toString());			
 			

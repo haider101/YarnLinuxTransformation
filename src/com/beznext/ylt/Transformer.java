@@ -85,7 +85,7 @@ public class Transformer {
 
 //		Map<Key, List<LinuxMetric>> equivalentMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
 //		Map<String, YarnMetric> yarnKeyMetrics = yarnDataProcessor.MetricsWithKey(yarnlst);
-		Map<Key, LinuxMetric> linuxkeyMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
+//		Map<Key, LinuxMetric> linuxkeyMetrics = linuxDataProcessor.MetricsWithKey(linuxlst);
 		Map<Key, YarnMetric> yarnKeyMetrics = yarnDataProcessor.MetricsWithKey(yarnlst);
 		Set<Key> ignoreMetrics = new HashSet<>();
 		
@@ -93,15 +93,19 @@ public class Transformer {
 			
 			log.info("Combining linux and yarn processed metrics.");			
 
-			Iterator<Entry<Key, LinuxMetric>> it = linuxkeyMetrics.entrySet().iterator();
-			while (it.hasNext()) {
+//			Iterator<Entry<Key, LinuxMetric>> it = linuxkeyMetrics.entrySet().iterator();
+//			while (it.hasNext()) {
+			Iterator<LinuxMetric> linuxIter = linuxlst.iterator();
+			while (linuxIter.hasNext()) {
 				    	
-		    	Entry<Key, LinuxMetric> entry = it.next();
-		    	Key key = entry.getKey();		    	
+//		    	Entry<Key, LinuxMetric> entry = it.next();
+//		    	Key key = entry.getKey();
+				LinuxMetric linuxmetric = linuxIter.next();
+				Key key = linuxDataProcessor.getKey(linuxmetric);
 		    	YarnMetric yarnMetric = yarnKeyMetrics.get(key);			
 		    	OutputMetric output = new OutputMetric();
 		    	if(yarnMetric!=null){
-			    	LinuxMetric linuxmetric = linuxkeyMetrics.get(key);
+//			    	LinuxMetric linuxmetric = linuxkeyMetrics.get(key);
 			    	
 //					if(linuxmetriclst != null && linuxmetriclst.size()>0){
 						
@@ -154,13 +158,17 @@ public class Transformer {
 //			}
 		
 		//add all Linux metric left unmatched with yarn metrics to output		
-		Iterator<Entry<Key, LinuxMetric>> iter = linuxkeyMetrics.entrySet().iterator();
+//		Iterator<Entry<Key, LinuxMetric>> iter = linuxkeyMetrics.entrySet().iterator();
 		
-	    while (iter.hasNext()) {	    	
+//	    while (iter.hasNext()) {
+		Iterator<LinuxMetric> linuxIter1 = linuxlst.iterator();
+		while (linuxIter1.hasNext()) {
 	    	
-	    	Entry<Key, LinuxMetric> entry = iter.next();	    	
-	    	LinuxMetric metric = entry.getValue();
-	    	Key key = entry.getKey();
+//	    	Entry<Key, LinuxMetric> entry = iter.next();	    	
+//	    	LinuxMetric metric = entry.getValue();
+//	    	Key key = entry.getKey();
+			LinuxMetric metric = linuxIter1.next();
+			Key key = linuxDataProcessor.getKey(metric);
 	    	if(!ignoreMetrics.contains(key)){
 //		    	for(LinuxMetric metric: metricLst){
 			    	OutputMetric output = new OutputMetric();

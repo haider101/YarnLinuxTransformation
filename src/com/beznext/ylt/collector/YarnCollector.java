@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,7 @@ public class YarnCollector implements ICollector{
 	
 	private String rawDataPath;
 	private IntervalStore intervalStore;
+	private List<String> filesToArchive;
 	
 	public YarnCollector(){
 		
@@ -44,7 +46,7 @@ public class YarnCollector implements ICollector{
     public Map<MixKey, List<?>> collect(){    	
     		
 		log.info("Collecting yarn raw data");
-		
+		filesToArchive = new ArrayList<>();
 		Map<MixKey, List<?>> yarnData = new HashMap<MixKey,List<?>>();
 		
 		FileManager fReader = new FileManager();
@@ -55,52 +57,58 @@ public class YarnCollector implements ICollector{
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy-HH");
 		StringBuilder alreadyProcessedFiles = new  StringBuilder();
 		boolean processed = false;
-		for(File file : files){    			
-			try {
-				
-				if(file.isFile() && file.getName().contains("YARN_PERF")){
+		if(files!=null){
+			for(File file : files){    			
+				try {
 					
-					log.info("Collecting yarn raw data from file : "+file.getName());
-	
-//					CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), ',', '\'', 1);
-					CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), CSVParser.DEFAULT_SEPARATOR, CSVParser.DEFAULT_QUOTE_CHARACTER ,  1);
-					ColumnPositionMappingStrategy<YarnMetric> strat = new ColumnPositionMappingStrategy<YarnMetric>();
-				    strat.setType(YarnMetric.class);
-				    String[] columns = new String[] {"finishedTime","memorySeconds","name","vcoreSeconds","startedTime","queue","state","elapsedTime","applicationType","id","user"}; // the fields to bind do in your JavaBean
-				    strat.setColumnMapping(columns);
-				    CsvToBean<YarnMetric> csv = new CsvToBean<YarnMetric>();
-				    List<YarnMetric> yarnMetricList = csv.parse(strat, reader);
-	//			    Iterator<YarnMetric> iter = yarnMetricList.iterator(); 
-	//			    while(iter.hasNext()){
-	//			    	YarnMetric metric = iter.next();
-	//			    	System.out.println(metric.toString());
-	//			    }
-	//			    return yarnMetricList;
-				    String fileName = file.getName();
-				    String dateTime = fileName.substring(fileName.indexOf(".")+1);
-				    dateTime = dateTime.substring(0,13);				    
-				    TimestampKey ts = new TimestampKey(dateTime,sdf);
-				    if(alreadyProcessedhours!=null && !alreadyProcessedhours.contains(ts.getTimestamp())){
-//					    processedHours.add(ts.getTimestamp());
-					    MixKey mkey = new MixKey(ts, null);
-					    yarnData.put(mkey, yarnMetricList);
-				    }
-				    else{
-				    	processed = true;
-				    	alreadyProcessedFiles.append(fileName+", ");
-//				    	log.info("Skipping already process file for Yarn Collector. File: "+fileName);
-				    }
+					if(file.isFile() && file.getName().contains("YARN_PERF")){
+						
+						log.info("Collecting yarn raw data from file : "+file.getName());
+		
+	//					CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), ',', '\'', 1);
+						CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), CSVParser.DEFAULT_SEPARATOR, CSVParser.DEFAULT_QUOTE_CHARACTER ,  1);
+						ColumnPositionMappingStrategy<YarnMetric> strat = new ColumnPositionMappingStrategy<YarnMetric>();
+					    strat.setType(YarnMetric.class);
+					    String[] columns = new String[] {"finishedTime","memorySeconds","name","vcoreSeconds","startedTime","queue","state","elapsedTime","applicationType","id","user"}; // the fields to bind do in your JavaBean
+					    strat.setColumnMapping(columns);
+					    CsvToBean<YarnMetric> csv = new CsvToBean<YarnMetric>();
+					    List<YarnMetric> yarnMetricList = csv.parse(strat, reader);
+		//			    Iterator<YarnMetric> iter = yarnMetricList.iterator(); 
+		//			    while(iter.hasNext()){
+		//			    	YarnMetric metric = iter.next();
+		//			    	System.out.println(metric.toString());
+		//			    }
+		//			    return yarnMetricList;
+					    String fileName = file.getName();
+					    String dateTime = fileName.substring(fileName.indexOf(".")+1);
+					    dateTime = dateTime.substring(0,13);				    
+					    TimestampKey ts = new TimestampKey(dateTime,sdf);
+					    if(alreadyProcessedhours!=null && !alreadyProcessedhours.contains(ts.getTimestamp())){
+	//					    processedHours.add(ts.getTimestamp());
+						    MixKey mkey = new MixKey(ts, null);
+						    yarnData.put(mkey, yarnMetricList);
+						    filesToArchive.add(file.getName());
+					    }
+					    else{
+					    	processed = true;
+					    	alreadyProcessedFiles.append(fileName+", ");
+	//				    	log.info("Skipping already process file for Yarn Collector. File: "+fileName);
+					    }
+					    reader.close();
+					}
+		
+				} catch (FileNotFoundException e) {
+					log.error("Yarn collector exception" + e);
+					e.printStackTrace();
+					return null;
+				} catch (Exception f) {
+					log.error("Yarn collector exception" + f);
+					f.printStackTrace();
+					return null;
 				}
-	
-			} catch (FileNotFoundException e) {
-				log.error("Yarn collector exception" + e);
-				e.printStackTrace();
-				return null;
-			} catch (Exception f) {
-				log.error("Yarn collector exception" + f);
-				f.printStackTrace();
-				return null;
 			}
+		}else{
+			return null;
 		}
 		if(processed){
 	    	log.info("Skipped already processed files for Yarn Collector. Files: "+alreadyProcessedFiles);			
@@ -109,5 +117,10 @@ public class YarnCollector implements ICollector{
 //		System.out.println(yarnData.toString());
 		return yarnData;
 	}   	
+    
+    public List<String> getFilesToArchive(){
+    	return filesToArchive;
+    }
+    
 }
 

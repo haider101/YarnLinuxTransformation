@@ -114,12 +114,39 @@ public class LinuxDataProcessor {
 		Map<Key, LinuxMetric> linuxKeyMetrics = new HashMap<>();
 		
 		for(LinuxMetric metric : linuxMetriclst){
-			Key key = new Key(metric.getWKLD_ELEMENT_3(), metric.getWKLD_ELEMENT_1());
+			String wkld3 = metric.getWKLD_ELEMENT_3();
+			if(metric.getWKLD_ELEMENT_3().contains("attempt")){
+				wkld3= metric.getWKLD_ELEMENT_3().substring(metric.getWKLD_ELEMENT_3().indexOf("_")+1,metric.getWKLD_ELEMENT_3().lastIndexOf("_"));
+			}
+			else if(metric.getWKLD_ELEMENT_3().contains("application")){
+				wkld3= metric.getWKLD_ELEMENT_3().substring(metric.getWKLD_ELEMENT_3().indexOf("_")+1);
+			}
+			Key key = new Key(wkld3, metric.getWKLD_ELEMENT_1());
 			linuxKeyMetrics.put(key, metric);
 //			System.out.println(metric.getId().toString());			
 			
 		}	
 		return linuxKeyMetrics;	
+	}
+	
+	public Key getKey(LinuxMetric metric){
+		
+//		Map<Key, LinuxMetric> linuxKeyMetrics = new HashMap<>();
+		
+//		for(LinuxMetric metric : linuxMetriclst){
+			String wkld3 = metric.getWKLD_ELEMENT_3();
+			if(metric.getWKLD_ELEMENT_3().contains("attempt")){
+				wkld3= metric.getWKLD_ELEMENT_3().substring(metric.getWKLD_ELEMENT_3().indexOf("_")+1,metric.getWKLD_ELEMENT_3().lastIndexOf("_"));
+			}
+			else if(metric.getWKLD_ELEMENT_3().contains("application")){
+				wkld3= metric.getWKLD_ELEMENT_3().substring(metric.getWKLD_ELEMENT_3().indexOf("_")+1);
+			}
+			Key key = new Key(wkld3, metric.getWKLD_ELEMENT_1());
+//			linuxKeyMetrics.put(key, metric);
+//			System.out.println(metric.getId().toString());			
+			
+//		}	
+		return key;	
 	}
 
 }
