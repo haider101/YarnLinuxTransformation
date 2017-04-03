@@ -54,7 +54,22 @@ public class FileManager {
 			File fDest = new File(archiveDir + File.separatorChar + fq);				
 			Path pSrc = name.toPath();
 			Path pDest = fDest.toPath();
-			log.info("Archiving processed Yarn file : "+fq);
+//			log.info("Archiving processed Yarn file : "+fq);
+			Files.move(pSrc, pDest, StandardCopyOption.REPLACE_EXISTING);				
+
+		}
+	}
+	
+	public void moveNodeFiles(String archiveDir, String files, List<String> filesToArchive) throws IOException {
+		
+		log.info("Move Node files");
+		for(String fq : filesToArchive){
+			
+			File name = new File(files + File.separatorChar + fq);
+			File fDest = new File(archiveDir + File.separatorChar + fq);				
+			Path pSrc = name.toPath();
+			Path pDest = fDest.toPath();
+//			log.info("Moving Node files for processed PROCESS files : "+fq);
 			Files.move(pSrc, pDest, StandardCopyOption.REPLACE_EXISTING);				
 
 		}

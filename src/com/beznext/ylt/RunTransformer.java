@@ -42,6 +42,7 @@ public class RunTransformer {
 		String intervalStorePath = null;
 		String logConfig = null; //"log4j.properties"
 		boolean enableArchiving = false;
+		boolean moveNodeFiles = false;
 		String yarnArchiveDirectory = null; 
 		String buildver = null;
 		
@@ -59,6 +60,7 @@ public class RunTransformer {
 			intervalStorePath = prop.getProperty("IntervalStore");
 			logConfig = prop.getProperty("logConfig");
 			enableArchiving = Boolean.parseBoolean(prop.getProperty("enableArchiving"));
+			moveNodeFiles = Boolean.parseBoolean(prop.getProperty("moveNodeFiles"));
 			yarnArchiveDirectory = prop.getProperty("yarnArchiveDirectory");
 			buildver = prop.getProperty("ylt.build");
 			
@@ -119,6 +121,7 @@ public class RunTransformer {
 				}
 				fm.archive(yarnArchiveDirectory, localFileDir, yColletor.getFilesToArchive());
 				fm.archive(yarnArchiveDirectory, localFileDir, qColletor.getFilesToArchive());
+				
 			} catch (Exception e) {
 //				log.error("Error detected - continuing: "+continueOnError, e);
 //				if (!continueOnError) {
@@ -126,6 +129,26 @@ public class RunTransformer {
 //				}
 			}
 		}
+		
+		if(moveNodeFiles){
+			// transformation is successful, now move these files
+			try {
+				// load up all the files
+				log.info("Using input directory: "+linuxDataPath);
+				String localFileDir = linuxDataPath;
+				if (localFileDir.startsWith("file://")) {
+					localFileDir = linuxDataPath.replaceFirst("file://", "");
+				}
+				fm.moveNodeFiles(outputDirPath, localFileDir, lColletor.getFilesToArchive());
+				
+			} catch (Exception e) {
+//				log.error("Error detected - continuing: "+continueOnError, e);
+//				if (!continueOnError) {
+					throw new RuntimeException(e);
+//				}
+			}			
+		}
+		
 		log.info("Transformation Ended");
 		System.exit(1);
 	}

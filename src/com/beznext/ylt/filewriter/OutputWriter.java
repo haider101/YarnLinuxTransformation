@@ -41,7 +41,7 @@ public class OutputWriter
 		String datetime = sdf.format(mk.getTimestampkey().getTimestamp());
 		
 		String OutputFileName = "PROCESS_"+mk.getNodekey().toString()+"_"+datetime+".csv";
-//		String OutputFileName = "WKLD_"+mk.getNodekey().toString()+".csv";
+		String NodeFileName = "NODE_"+mk.getNodekey().toString()+".csv";
 		
 		CSVWriter csvWriter = null;
 		
@@ -59,7 +59,7 @@ public class OutputWriter
             //Set mappingStrategy type to output Type
             mappingStrategy.setType(OutputMetric.class);
             
-            //Fields in Employee Bean
+            //Fields in PROCESS Bean
             String[] columns = new String[]{"START_TIME","END_TIME","WKLD_ELEMENT_1","WKLD_ELEMENT_2","WKLD_ELEMENT_3","WKLD_ELEMENT_4",
 						            		"PROCESS_ID","COMMAND","UsrTimeMS","SysTimeMS","elapsedTimeSec","VMRssKB",
 						            		"logReads","logReadsKB","logWrites","logWritesKB","physReadsKB",
@@ -68,7 +68,7 @@ public class OutputWriter
             //Setting the colums for mappingStrategy
             mappingStrategy.setColumnMapping(columns);
             
-            //Writing empList to csv file
+            //Writing PROCESS List to csv file
             bc.write(mappingStrategy,csvWriter,outpList);
 //            System.out.println("CSV File created successfully.");
             log.info("CSV File created successfully, File name : " +OutputFileName);

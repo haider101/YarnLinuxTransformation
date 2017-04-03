@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +48,7 @@ public class LinuxCollector implements ICollector{
 		log.info("Collecting linux raw data");   		
 		
 		Map<MixKey,List<?>> linuxData = new HashMap<>();
-		
+		filesToArchive = new ArrayList<>();
 		FileManager fReader = new FileManager();
 		File[] files = fReader.getFiles(rawDataPath);
 		Set<Long> alreadyProcessedhours = intervalStore.getAlreadyProcessedhours();
@@ -88,6 +89,9 @@ public class LinuxCollector implements ICollector{
 						    NodeKey nodekey = new NodeKey(nodeName);
 						    MixKey mk = new MixKey(ts, nodekey);
 						    linuxData.put(mk, linuxMetricList);
+						    String nodeFileName = file.getName().replace("PROCESS", "NODE");
+//						    System.out.println("ProcessFile : "+file.getName()+", NodeFile : "+nodeFileName);
+						    filesToArchive.add(nodeFileName);
 					    }
 					    else{
 					    	processed = true;
